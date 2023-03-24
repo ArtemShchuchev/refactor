@@ -3,6 +3,22 @@
 class transform
 {
 public:
+	transform(const Shape&);
+	Shape shift(int, int, int);
+	Shape scaleX(int);
+	Shape scaleY(int);
+	Shape scaleZ(int);
+	Shape scale(int);
+
+private:
+	Shape shape;
+};
+
+/*
+#include"shape.h"
+class transform
+{
+public:
 	transform(const Shape& sh);
 	Shape shift(int m, int n, int k);
 	Shape scaleX(int a);
@@ -13,3 +29,4 @@ public:
 private:
 	Shape shape;
 };
+*/

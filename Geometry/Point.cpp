@@ -22,6 +22,13 @@ void Point::setPoint(const int _x, const int _y, const int _z)
 	z = _z;
 }
 
+void Point::shiftPoint(const int delta_x, const int delta_y, const int delta_z)
+{
+	x += delta_x;
+	y += delta_y;
+	z += delta_z;
+}
+
 Point Point::getPoint()
 {
 	return *this;

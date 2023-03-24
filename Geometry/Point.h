@@ -8,6 +8,7 @@ public:
 	Point(const int _x, const int _y, const int _z = 0);
 	Point(const Point&);
 	void setPoint(const int _x, const int _y, const int _z = 0);
+	void shiftPoint(const int delta_x, const int delta_y, const int delta_z = 0);
 	Point getPoint();
 	int getX();
 	int getY();
