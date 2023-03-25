@@ -47,7 +47,7 @@ int Point::getZ()
 	return this->z;
 }
 
-const Point Point::abs(Point const& point)
+const Point Point::absPoint(Point const& point)
 {
 	return Point(abs(point.x), abs(point.y), abs(point.z));
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 class Point
 {
 private:
@@ -13,7 +14,7 @@ public:
 	int getX();
 	int getY();
 	int getZ();
-	const Point abs(Point const&);
+	const Point absPoint(Point const&);
 	friend const Point operator- (const Point&, const Point&);
 	friend const Point operator+ (const Point&, const Point&);
 	Point& operator= (const Point&);

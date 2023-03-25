@@ -33,7 +33,7 @@ Shape::Shape(int _type, Point P1, Point P2, Point P3, Point P4, Point P5, Point 
 
 	// Считаем площадь фигуры
 	// стороны фигуры
-	Point difr(Point::abs(P1 - P2));
+	Point difr(Point::absPoint(P1 - P2));
 	switch (type)
 	{
 	case line:
