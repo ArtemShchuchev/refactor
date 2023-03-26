@@ -7,17 +7,17 @@ Shape::Shape(int _type, Point P1, Point P2, Point P3, Point P4, Point P5, Point 
 	// заполняем координаты фигуры
 	switch (type)
 	{
-	case line: 
+	case LINE: 
 		p[0] = P1;
 		p[1] = P2;
 		break;
-	case sqr:
+	case SQR:
 		p[0] = P1;
 		p[1] = P2;
 		p[2] = P3;
 		p[3] = P4;
 		break;
-	case cube:
+	case CUBE:
 		p[0] = P1;
 		p[1] = P2;
 		p[2] = P3;
@@ -36,13 +36,13 @@ Shape::Shape(int _type, Point P1, Point P2, Point P3, Point P4, Point P5, Point 
 	Point difr(Point::absPoint(P1 - P2));
 	switch (type)
 	{
-	case line:
+	case LINE:
 		square = 0;
 		break;
-	case sqr:
+	case SQR:
 		square = difr.getX() * difr.getY();
 		break;
-	case cube:
+	case CUBE:
 		square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
 		break;
 	default:
@@ -53,13 +53,13 @@ Shape::Shape(int _type, Point P1, Point P2, Point P3, Point P4, Point P5, Point 
 	// стороны фигуры
 	switch (type)
 	{
-	case line:
+	case LINE:
 		volume = 0;
 		break;
-	case sqr:
+	case SQR:
 		volume = 0;
 		break;
-	case cube:
+	case CUBE:
 		volume = difr.getX() * difr.getY() * difr.getZ();
 		break;
 	default:
@@ -73,11 +73,11 @@ Shape::Shape(int type, Point P, double R, double H)
 	// заполняем координаты фигуры
 	switch (type)
 	{
-	case circle:
+	case CIRCLE:
 		p[0] = P;
 		radius = R;
 		break;
-	case cylinder:
+	case CYLINDER:
 		p[0] = P;
 		radius = R;
 		height = H;
@@ -91,10 +91,10 @@ Shape::Shape(int type, Point P, double R, double H)
 
 	switch (type)
 	{
-	case circle:
+	case CIRCLE:
 		square = M_PI * R * R;
 		break;
-	case cylinder:
+	case CYLINDER:
 		square = M_PI * R * R + 2 * R * height;
 		break;
 	default:
@@ -105,13 +105,13 @@ Shape::Shape(int type, Point P, double R, double H)
 	// стороны фигуры
 	switch (type)
 	{
-	case line:
+	case LINE:
 		volume = 0;
 		break;
-	case sqr:
+	case SQR:
 		volume = 0;
 		break;
-	case cube:
+	case CUBE:
 		volume = M_PI * R * R * height;
 		break;
 	default:
