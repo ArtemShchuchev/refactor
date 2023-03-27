@@ -3,7 +3,7 @@
 transform::transform(const Shape& sh) : shape(sh)
 {
 }
-
+/*
 Shape transform::shift(int x, int y, int z)
 {
 	switch (shape.getType())
@@ -145,6 +145,7 @@ Shape transform::scale(int s)
 
 	return shape;
 }
+*/
 
 
 /*

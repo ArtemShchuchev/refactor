@@ -11,12 +11,14 @@ private:
 	double height;
 	double radius;
 
+	void shapeSquare();
+	void shapeVolume();
+
 public:
 	enum{LINE, SQR, CUBE, CIRCLE, CYLINDER};
-	Shape() = default;
 	Shape(int type, Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8);
 	Shape(int type, Point P, double R, double H);
-	int getType() { return type; }
+	int getType();
 
 };
 

@@ -8,11 +8,8 @@ Point::Point(const int _x, const int _y, const int _z) : x(_x), y(_y), z(_z)
 {
 }
 
-Point::Point(const Point& P)
+Point::Point(const Point& P) : x(P.x), y(P.y), z(P.z)
 {
-	x = P.x;
-	y = P.y;
-	z = P.z;
 }
 
 void Point::setPoint(const int _x, const int _y, const int _z)
