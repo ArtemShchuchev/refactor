@@ -3,15 +3,15 @@
 class transform
 {
 public:
-	transform(const Shape&);
-	Shape shift(int, int, int);
+	transform(Shape* const);
+	Shape* shift(int, int, int);
 	Shape scaleX(int);
 	Shape scaleY(int);
 	Shape scaleZ(int);
 	Shape scale(int);
 
 private:
-	Shape shape;
+	Shape* shape;
 };
 
 /*

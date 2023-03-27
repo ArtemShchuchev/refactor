@@ -1,92 +1,28 @@
 ﻿#define _USE_MATH_DEFINES
 #include"shape.h"
 #include<cmath>
-Shape::Shape(int _type, Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8)
+Shape::Shape(const int qtyPoint) : volume(0.0), square(0.0), p((qtyPoint <= 0) ? nullptr : new Point[qtyPoint])
 {
-	// заполняем координаты фигуры
-	type = _type;
-	p[0] = P1;
-	p[1] = P2;
-	p[2] = P3;
-	p[3] = P4;
-	p[4] = P5;
-	p[5] = P6;
-	p[6] = P7;
-	p[7] = P8;
-
-	radius = 0.0;
-	height = 0.0;
-
-	shapeSquare();
-	shapeVolume();
 }
 
-Shape::Shape(int _type, Point P, double R, double H)
+Shape::~Shape()
 {
-	// заполняем координаты фигуры
-	type = _type;
-	p[0] = P;
-	radius = R;
-	height = (type == CYLINDER) ? H : 0.0;
-
-	shapeSquare();
-	shapeVolume();
+	if (p) delete[] p;
 }
 
-int Shape::getType()
+Point* Shape::getPoint()
 {
-	return type;
+	return p;
 }
 
-void Shape::shapeSquare()
+double Shape::getVolume()
 {
-	// Считаем площадь фигуры
-	// стороны фигуры
-	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
-	square = 0.0;
-
-	if (type == SQR) square = difr.getX() * difr.getY();
-	else if (type == CUBE) square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
-	else if (type == CIRCLE) square = M_PI * radius * radius;
-	else if (type == CYLINDER) square = 2 * M_PI * radius * (height + radius);
-	/*
-	switch (type)
-	{
-	case SQR:
-		square = difr.getX() * difr.getY();
-		break;
-	case CUBE:
-		square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
-		break;
-	case CIRCLE:
-		square = M_PI * radius * radius;
-		break;
-	case CYLINDER:
-		square = 2 * M_PI * radius * (height + radius);
-		break;
-	}
-	*/
+	return volume;
 }
-void Shape::shapeVolume()
-{
-	// Считаем объем фигуры
-	// стороны фигуры
-	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
-	volume = 0.0;
 
-	if (type == CUBE) volume = difr.getX() * difr.getY() * difr.getZ();
-	else if (type == CYLINDER) volume = M_PI * radius * radius * height;
-	/*
-	switch (type)
-	{
-	case CUBE:
-		volume = difr.getX() * difr.getY() * difr.getZ();
-		break;
-	case CYLINDER:
-		volume = M_PI * radius * radius * height;
-		break;
-	}
-	*/
+double Shape::getSquare()
+{
+	return square;
 }
 
 /*
@@ -214,3 +150,36 @@ Shape::Shape(int type, int _x1, int _y1, double R, double H)
 
 }
 */
+
+const int Line::qtyPoint = 2;
+
+Line::Line(Point P1, Point P2) : Shape(qtyPoint)
+{
+	p[0] = P1;
+	p[1] = P2;
+}
+
+Square::Square(Point P1, Point P2, Point P3, Point P4) : p{P1, P2, P3, P4}, Shape(qtyPoint)
+{
+	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
+	square = difr.getX() * difr.getY();
+}
+
+Cube::Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8)
+	: p{ P1, P2, P3, P4, P5, P6, P7, P8 }, Shape(qtyPoint)
+{
+	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
+	square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
+	volume = difr.getX() * difr.getY() * difr.getZ();
+}
+
+Circle::Circle(Point P, double R) : p(P), radius(R), Shape(qtyPoint)
+{
+	square = M_PI * radius * radius;
+}
+
+Cylinder::Cylinder(Point P, double R, double H) : p(P), radius(R), height(H), Shape(qtyPoint)
+{
+	square = 2 * M_PI * radius * (height + radius);
+	volume = M_PI * radius * radius * height;
+}

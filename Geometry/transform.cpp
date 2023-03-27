@@ -1,11 +1,13 @@
 ﻿#include "transform.h"
 
-transform::transform(const Shape& sh) : shape(sh)
+transform::transform(Shape* const sh) : shape(sh)
 {
 }
-/*
-Shape transform::shift(int x, int y, int z)
+Shape* transform::shift(int x, int y, int z)
 {
+	shape->shiftPoint(x, y, z);
+
+	/*
 	switch (shape.getType())
 	{
 	case Shape::LINE:
@@ -30,8 +32,10 @@ Shape transform::shift(int x, int y, int z)
 		shape.x8 += m; shape.y8 += n; shape.z8 += k;
 		break;
 	}
+	*/
 	return shape;
 }
+/*
 
 Shape transform::scaleX(int a)
 {

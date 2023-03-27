@@ -3,23 +3,20 @@
 #include "Point.h"
 class Shape : public Point
 {
-private:
-	int type;
-	Point p[8];
+protected:
 	double volume;
 	double square;
-	double height;
-	double radius;
+	Point* p;
 
-	void shapeSquare();
-	void shapeVolume();
+private:
 
 public:
-	enum{LINE, SQR, CUBE, CIRCLE, CYLINDER};
-	Shape(int type, Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8);
-	Shape(int type, Point P, double R, double H);
-	int getType();
-
+	Shape(int qtyPoint);
+	~Shape();
+	Point* getPoint();
+	double getVolume();
+	double getSquare();
+	//void shift(int x, int y, int z);
 };
 
 /*
@@ -51,3 +48,56 @@ public:
 	double radius;
 };
 */
+
+class Line : public Shape
+{
+private:
+	static const int qtyPoint;
+
+public:
+	Line(Point P1, Point P2);
+};
+
+class Square : public Shape
+{
+private:
+	const int qtyPoint = 4;
+	Point p[4];
+
+public:
+	Square(Point P1, Point P2, Point P3, Point P4);
+};
+
+class Cube : public Shape
+{
+private:
+	const int qtyPoint = 8;
+	Point p[8];
+
+public:
+	Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8);
+};
+
+class Circle : public Shape
+{
+private:
+	const int qtyPoint = 1;
+	Point p;
+	double radius;
+
+public:
+	Circle(Point P, double R);
+};
+
+class Cylinder : public Shape
+{
+private:
+	const int qtyPoint = 1;
+	Point p;
+	double height;
+	double radius;
+
+public:
+	Cylinder(Point P, double R, double H);
+};
+
