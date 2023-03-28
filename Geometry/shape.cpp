@@ -197,7 +197,7 @@ Square::Square(Point P1, Point P2, Point P3, Point P4) : Shape(qtyPoint)
 	p[1] = P2;
 	p[2] = P3;
 	p[3] = P4;
-	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
+	Point difr(Point::absPoint(p[0] - p[1]));// С чего решили, что точки на диагонали? ну, допустим
 	square = difr.getX() * difr.getY();
 }
 
@@ -214,7 +214,7 @@ Cube::Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7,
 	p[5] = P6;
 	p[6] = P7;
 	p[7] = P8;
-	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
+	Point difr(Point::absPoint(p[0] - p[1]));// С чего решили, что точки на диагонали? ну, допустим
 	square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
 	volume = difr.getX() * difr.getY() * difr.getZ();
 }
