@@ -9,14 +9,19 @@ protected:
 	Point* p;
 
 private:
+	int qtyPoint;
 
 public:
-	Shape(int qtyPoint);
+	Shape(const int _qtyPoint);
 	~Shape();
-	Point* getPoint();
+	Point* getPoints();
 	double getVolume();
 	double getSquare();
-	//void shift(int x, int y, int z);
+	virtual void shift(const int delta_x, const int delta_y, const int delta_z = 0);
+	virtual void scaleX(const int sc);
+	virtual void scaleY(const int sc);
+	virtual void scaleZ(const int sc);
+	virtual void scale(const int sc);
 };
 
 /*
@@ -61,8 +66,7 @@ public:
 class Square : public Shape
 {
 private:
-	const int qtyPoint = 4;
-	Point p[4];
+	static const int qtyPoint;
 
 public:
 	Square(Point P1, Point P2, Point P3, Point P4);
@@ -71,8 +75,7 @@ public:
 class Cube : public Shape
 {
 private:
-	const int qtyPoint = 8;
-	Point p[8];
+	static const int qtyPoint;
 
 public:
 	Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8);
@@ -81,23 +84,31 @@ public:
 class Circle : public Shape
 {
 private:
-	const int qtyPoint = 1;
-	Point p;
+	static const int qtyPoint;
 	double radius;
 
 public:
 	Circle(Point P, double R);
+	void shift(const int delta_x, const int delta_y, const int delta_z = 0) override;
+	void scaleX(const int) override;
+	void scaleY(const int) override;
+	void scaleZ(const int) override;
+	void scale(const int) override;
 };
 
 class Cylinder : public Shape
 {
 private:
-	const int qtyPoint = 1;
-	Point p;
+	static const int qtyPoint;
 	double height;
 	double radius;
 
 public:
 	Cylinder(Point P, double R, double H);
+	void shift(const int delta_x, const int delta_y, const int delta_z = 0) override;
+	void scaleX(const int) override;
+	void scaleY(const int) override;
+	void scaleZ(const int) override;
+	void scale(const int) override;
 };
 

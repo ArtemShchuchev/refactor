@@ -1,20 +1,4 @@
-﻿#pragma once
-#include"shape.h"
-class transform
-{
-public:
-	transform(Shape* const);
-	Shape* shift(int, int, int);
-	Shape scaleX(int);
-	Shape scaleY(int);
-	Shape scaleZ(int);
-	Shape scale(int);
-
-private:
-	Shape* shape;
-};
-
-/*
+﻿/*
 #include"shape.h"
 class transform
 {

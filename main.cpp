@@ -31,12 +31,32 @@ int main(int argc, char** argv)
 		<< L"Объём:   " << shapePtr->getVolume() << "\n"
 		<< L"Площадь: " << shapePtr->getSquare() << "\n\n";
 	
-	//Line ln({ 20, 30 }, { 10, 15 });
-	//transform tr(&ln);
-	//Shape* ptr = tr.shift(100, 100, 10);
-	//shapePtr->shift(10, 10, 10);
-	//Point pl1 = ln.getPoint_1(), pl2 = ln.getPoint_2();
-	Point* pl = shapePtr->getPoint();
+	Point* pl = shapePtr->getPoints();
+	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
+	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
+	std::wcout << L"Shift (10, 10, 1)...\n";
+	shapePtr->shift(10, 10, 1);
+	pl = shapePtr->getPoints();
+	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
+	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
+	std::wcout << L"scaleX(2)...\n";
+	shapePtr->scaleX(2);
+	pl = shapePtr->getPoints();
+	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
+	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
+	std::wcout << L"scaleY(2)...\n";
+	shapePtr->scaleY(2);
+	pl = shapePtr->getPoints();
+	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
+	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
+	std::wcout << L"scaleZ(3)...\n";
+	shapePtr->scaleZ(3);
+	pl = shapePtr->getPoints();
+	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
+	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
+	std::wcout << L"scale(2)...\n";
+	shapePtr->scale(2);
+	pl = shapePtr->getPoints();
 	std::wcout << "Point_1: " << pl[0].getX() << ", " << pl[0].getY() << ", " << pl[0].getZ() << "\n";
 	std::wcout << "Point_2: " << pl[1].getX() << ", " << pl[1].getY() << ", " << pl[1].getZ() << "\n\n";
 

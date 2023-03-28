@@ -1,8 +1,9 @@
 ﻿#define _USE_MATH_DEFINES
 #include"shape.h"
-#include<cmath>
-Shape::Shape(const int qtyPoint) : volume(0.0), square(0.0), p((qtyPoint <= 0) ? nullptr : new Point[qtyPoint])
+
+Shape::Shape(const int _qtyPoint) : qtyPoint(_qtyPoint), volume(0.0), square(0.0)
 {
+	p = (qtyPoint <= 0) ? nullptr : new Point[qtyPoint];
 }
 
 Shape::~Shape()
@@ -10,7 +11,7 @@ Shape::~Shape()
 	if (p) delete[] p;
 }
 
-Point* Shape::getPoint()
+Point* Shape::getPoints()
 {
 	return p;
 }
@@ -23,6 +24,33 @@ double Shape::getVolume()
 double Shape::getSquare()
 {
 	return square;
+}
+
+void Shape::shift(const int delta_x, const int delta_y, const int delta_z)
+{
+	for (int i(0); i< qtyPoint; ++i)
+		p[i].shiftPoint(delta_x, delta_y, delta_z);
+}
+
+void Shape::scaleX(const int sc)
+{
+	for (int i(0); i < qtyPoint; ++i)
+		p[i].scalePointX(sc);
+}
+void Shape::scaleY(const int sc)
+{
+	for (int i(0); i < qtyPoint; ++i)
+		p[i].scalePointY(sc);
+}
+void Shape::scaleZ(const int sc)
+{
+	for (int i(0); i < qtyPoint; ++i)
+		p[i].scalePointZ(sc);
+}
+void Shape::scale(const int sc)
+{
+	for (int i(0); i < qtyPoint; ++i)
+		p[i].scalePoint(sc);
 }
 
 /*
@@ -151,6 +179,7 @@ Shape::Shape(int type, int _x1, int _y1, double R, double H)
 }
 */
 
+/////////////////////////////////////////////
 const int Line::qtyPoint = 2;
 
 Line::Line(Point P1, Point P2) : Shape(qtyPoint)
@@ -159,27 +188,102 @@ Line::Line(Point P1, Point P2) : Shape(qtyPoint)
 	p[1] = P2;
 }
 
-Square::Square(Point P1, Point P2, Point P3, Point P4) : p{P1, P2, P3, P4}, Shape(qtyPoint)
+/////////////////////////////////////////////
+const int Square::qtyPoint = 4;
+
+Square::Square(Point P1, Point P2, Point P3, Point P4) : Shape(qtyPoint)
 {
+	p[0] = P1;
+	p[1] = P2;
+	p[2] = P3;
+	p[3] = P4;
 	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
 	square = difr.getX() * difr.getY();
 }
 
-Cube::Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8)
-	: p{ P1, P2, P3, P4, P5, P6, P7, P8 }, Shape(qtyPoint)
+/////////////////////////////////////////////
+const int Cube::qtyPoint = 8;
+
+Cube::Cube(Point P1, Point P2, Point P3, Point P4, Point P5, Point P6, Point P7, Point P8) : Shape(qtyPoint)
 {
+	p[0] = P1;
+	p[1] = P2;
+	p[2] = P3;
+	p[3] = P4;
+	p[4] = P5;
+	p[5] = P6;
+	p[6] = P7;
+	p[7] = P8;
 	Point difr(Point::absPoint(p[0] - p[1]));// Чушь! С чего решили, что точки на диагонали?
 	square = 2 * difr.getX() * difr.getY() + 2 * difr.getX() * difr.getZ() + 2 * difr.getY() * difr.getZ();
 	volume = difr.getX() * difr.getY() * difr.getZ();
 }
 
-Circle::Circle(Point P, double R) : p(P), radius(R), Shape(qtyPoint)
+/////////////////////////////////////////////
+const int Circle::qtyPoint = 1;
+
+void Circle::shift(const int delta_x, const int delta_y, const int delta_z)
 {
+	return;
+}
+
+Circle::Circle(Point P, double R) : radius(R), Shape(qtyPoint)
+{
+	p[0] = P;
 	square = M_PI * radius * radius;
 }
 
-Cylinder::Cylinder(Point P, double R, double H) : p(P), radius(R), height(H), Shape(qtyPoint)
+void Circle::scaleX(const int sc)
 {
+	return;
+}
+
+void Circle::scaleY(const int sc)
+{
+	return;
+}
+
+void Circle::scaleZ(const int sc)
+{
+	return;
+}
+
+void Circle::scale(const int)
+{
+	return;
+}
+
+/////////////////////////////////////////////
+const int Cylinder::qtyPoint = 1;
+
+void Cylinder::shift(const int delta_x, const int delta_y, const int delta_z)
+{
+	return;
+}
+
+Cylinder::Cylinder(Point P, double R, double H) : radius(R), height(H), Shape(qtyPoint)
+{
+	p[0] = P;
 	square = 2 * M_PI * radius * (height + radius);
 	volume = M_PI * radius * radius * height;
+}
+
+void Cylinder::scaleX(const int)
+{
+	return;
+}
+
+void Cylinder::scaleY(const int)
+{
+	return;
+}
+
+void Cylinder::scaleZ(const int)
+{
+	return;
+}
+
+void Cylinder::scale(const int)
+{
+	return;
 }
